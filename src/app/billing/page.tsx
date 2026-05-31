@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { Button } from "@/components/ui/Button";
 import { api } from "@/lib/api";
@@ -12,13 +13,41 @@ const plans = [
 ];
 
 export default function BillingPage() {
+  const router = useRouter();
   const [subscription, setSubscription] = useState<any>();
   const [payments, setPayments] = useState<any[]>([]);
   const [cycle, setCycle] = useState("monthly");
+  const [notice, setNotice] = useState("");
+  const [verifying, setVerifying] = useState(false);
+
   useEffect(() => {
-    api.get("/subscriptions/current").then((res) => setSubscription(res.data.subscription));
-    api.get("/payments/history").then((res) => setPayments(res.data.payments));
-  }, []);
+    const params = new URLSearchParams(window.location.search);
+    const reference = params.get("reference") || params.get("trxref");
+    const onboarding = params.get("onboarding");
+    if (onboarding) setNotice("Email verified. Choose a subscription plan to activate your workspace.");
+    async function load() {
+      if (reference) {
+        setVerifying(true);
+        try {
+          await api.post("/subscriptions/verify", { reference });
+          setNotice("Payment verified. Redirecting to your dashboard...");
+          window.setTimeout(() => router.push("/dashboard"), 1000);
+        } catch (error: any) {
+          setNotice(error.response?.data?.message || "Payment verification failed. Please try again.");
+        } finally {
+          setVerifying(false);
+        }
+      }
+      const [subscriptionRes, paymentsRes] = await Promise.all([
+        api.get("/subscriptions/current"),
+        api.get("/payments/history")
+      ]);
+      setSubscription(subscriptionRes.data.subscription);
+      setPayments(paymentsRes.data.payments);
+    }
+    load();
+  }, [router]);
+
   async function subscribe(plan: string) {
     const { data } = await api.post("/subscriptions/subscribe", { plan, billingCycle: cycle });
     window.location.href = data.authorizationUrl;
@@ -26,6 +55,7 @@ export default function BillingPage() {
   return (
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">Billing</h1>
+      {notice && <p className="mt-4 rounded-md bg-mint/10 p-3 text-sm font-medium text-mint">{notice}</p>}
       <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
         <p className="font-semibold text-navy">Current plan: <span className="capitalize">{subscription?.plan || "trial"}</span></p>
         <p className="mt-1 text-sm text-slate-500">Status: {subscription?.status || "loading"}</p>
@@ -36,7 +66,7 @@ export default function BillingPage() {
           <div key={plan.id} className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-bold text-navy">{plan.name}</h2>
             <p className="mt-3 text-2xl font-bold">{cycle === "monthly" ? plan.monthly : plan.annual}</p>
-            <Button className="mt-5 w-full" onClick={() => subscribe(plan.id)}>Subscribe</Button>
+            <Button className="mt-5 w-full" loading={verifying} onClick={() => subscribe(plan.id)}>Subscribe</Button>
           </div>
         ))}
       </div>

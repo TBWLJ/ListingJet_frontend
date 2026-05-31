@@ -9,7 +9,7 @@ import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import { PublicNav } from "@/components/layout/PublicNav";
 import { Button } from "@/components/ui/Button";
-import { api, setSession } from "@/lib/api";
+import { api } from "@/lib/api";
 
 const schema = z.object({
   businessName: z.string().min(2),
@@ -27,6 +27,7 @@ type FormData = z.infer<typeof schema>;
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState("");
+  const [submittedEmail, setSubmittedEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
   const [states, setStates] = useState<string[]>([]);
@@ -48,9 +49,9 @@ export default function RegisterPage() {
   async function onSubmit(values: FormData) {
     setError("");
     try {
-      const { data } = await api.post("/auth/register", values);
-      setSession(data.token);
-      router.push("/dashboard");
+      await api.post("/auth/register", values);
+      setSubmittedEmail(values.email);
+      router.push(`/verify-email?sent=${encodeURIComponent(values.email)}`);
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed");
     }
@@ -66,6 +67,11 @@ export default function RegisterPage() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-bold text-navy">Register</h2>
+          {submittedEmail && (
+            <p className="mt-3 rounded-md bg-mint/10 p-3 text-sm text-mint">
+              Account created. Check {submittedEmail} to verify your email and continue to subscription.
+            </p>
+          )}
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               ["businessName", "Business name"], ["ownerName", "Owner name"], ["email", "Email"], ["phone", "Phone"], ["industry", "Industry"]
