@@ -16,7 +16,7 @@ export default function ListingDetailsPage() {
   const [listing, setListing] = useState<Listing>();
   useEffect(() => { api.get(`/listings/${id}`).then((res) => setListing(res.data.listing)); }, [id]);
   if (!listing) return <DashboardShell><p>Loading listing...</p></DashboardShell>;
-  const campaignUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/campaign/${listing.slug}`;
+  const campaignUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://listingjet.name.ng"}/campaign/${listing.slug}`;
   async function action(path: string) {
     await api.post(`/listings/${id}/${path}`);
     const { data } = await api.get(`/listings/${id}`);
@@ -24,26 +24,26 @@ export default function ListingDetailsPage() {
   }
   return (
     <DashboardShell>
-      <div className="flex flex-col justify-between gap-4 sm:flex-row">
-        <div>
+      <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-start">
+        <div className="min-w-0">
           <h1 className="text-2xl font-bold text-navy">{listing.title}</h1>
           <p className="text-sm text-slate-500">{listing.location} · {money(listing.price, listing.currency)}</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid gap-2 sm:flex sm:flex-wrap xl:justify-end">
           <Link href={`/listings/edit?id=${listing._id}`}><Button variant="secondary">Edit</Button></Link>
           <Link href={`/marketing?listing=${listing._id}`}><Button variant="secondary">Marketing hub</Button></Link>
           <a href={campaignUrl} target="_blank"><Button><ExternalLink className="h-4 w-4" /> Campaign</Button></a>
         </div>
       </div>
       <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <Stat label="Views" value={listing.stats?.views || 0} />
           <Stat label="Leads" value={listing.stats?.leadSubmissions || 0} />
           <Stat label="WhatsApp" value={listing.stats?.whatsappClicks || 0} />
           <Stat label="Shares" value={listing.stats?.shareClicks || 0} />
         </div>
         <p className="mt-6 text-slate-600">{listing.description}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 grid gap-2 sm:flex sm:flex-wrap">
           <Button variant="secondary" onClick={() => navigator.clipboard.writeText(campaignUrl)}><Copy className="h-4 w-4" /> Copy link</Button>
           <Button variant="secondary" onClick={() => action("publish")}><Play className="h-4 w-4" /> Publish</Button>
           <Button variant="secondary" onClick={() => action("pause")}><Pause className="h-4 w-4" /> Pause</Button>

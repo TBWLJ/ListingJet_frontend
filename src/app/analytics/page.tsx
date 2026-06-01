@@ -14,7 +14,7 @@ export default function AnalyticsPage() {
   return (
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">Analytics</h1>
-      <div className="mt-6 grid gap-4 md:grid-cols-5">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <MetricCard label="Listings" value={metrics?.totalListings ?? "..."} icon={BriefcaseBusiness} />
         <MetricCard label="Views" value={metrics?.totalViews ?? "..."} icon={BarChart3} />
         <MetricCard label="Leads" value={metrics?.totalLeads ?? "..."} icon={MessageSquare} />
@@ -23,9 +23,9 @@ export default function AnalyticsPage() {
       </div>
       <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
         <h2 className="font-semibold text-navy">Monthly performance chart</h2>
-        <div className="mt-5 flex h-64 items-end gap-3 border-b border-slate-200">
+        <div className="mt-5 flex h-64 items-end gap-2 overflow-x-auto border-b border-slate-200 pb-1 sm:gap-3">
           {(data?.monthlyPerformance?.length ? data.monthlyPerformance : Array.from({ length: 8 })).map((item: any, index: number) => (
-            <div key={index} className="flex flex-1 flex-col items-center justify-end">
+            <div key={index} className="flex min-w-10 flex-1 flex-col items-center justify-end">
               <div className="w-full rounded-t bg-mint" style={{ height: `${Math.max(18, (item?.count || index + 2) * 12)}px` }} />
               <span className="mt-2 text-xs text-slate-500">{item?._id?.month || index + 1}</span>
             </div>

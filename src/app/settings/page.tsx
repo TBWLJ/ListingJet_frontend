@@ -18,7 +18,7 @@ export default function SettingsPage() {
   return (
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">Workspace settings</h1>
-      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
+      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
         <div className="grid gap-4 md:grid-cols-2">
           {[
             ["name", "Business name"], ["description", "Description"], ["contactEmail", "Contact email"], ["phone", "Phone"], ["whatsapp", "WhatsApp"], ["website", "Website"], ["address", "Address"]
@@ -30,7 +30,7 @@ export default function SettingsPage() {
           ))}
           <div>
             <label>Brand color</label>
-            <div className="mt-1 flex items-center gap-3">
+            <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-center">
               <input
                 type="color"
                 className="h-10 w-14 cursor-pointer rounded-md border border-slate-200 bg-white p-1"
@@ -41,8 +41,10 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
-        <Button className="mt-6" onClick={save}>Save settings</Button>
-        {saved && <span className="ml-3 text-sm text-mint">Saved</span>}
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button className="w-full sm:w-auto" onClick={save}>Save settings</Button>
+          {saved && <span className="text-sm text-mint">Saved</span>}
+        </div>
       </section>
     </DashboardShell>
   );

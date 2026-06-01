@@ -14,7 +14,7 @@ export default function DashboardPage() {
   return (
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">Dashboard overview</h1>
-      <div className="mt-6 grid gap-4 md:grid-cols-4">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Total listings" value={metrics?.totalListings ?? "..."} icon={BriefcaseBusiness} />
         <MetricCard label="Total views" value={metrics?.totalViews ?? "..."} icon={BarChart3} />
         <MetricCard label="Total leads" value={metrics?.totalLeads ?? "..."} icon={MessageSquare} />
@@ -25,8 +25,8 @@ export default function DashboardPage() {
           <h2 className="font-semibold text-navy">Best performing listings</h2>
           <div className="mt-4 space-y-3">
             {data?.topListings?.length ? data.topListings.map((listing: any) => (
-              <div key={listing._id} className="flex justify-between rounded-md bg-slate-50 p-3 text-sm">
-                <span>{listing.title}</span><span>{listing.stats?.views || 0} views</span>
+              <div key={listing._id} className="flex flex-col gap-1 rounded-md bg-slate-50 p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+                <span className="min-w-0 truncate">{listing.title}</span><span className="shrink-0 font-medium">{listing.stats?.views || 0} views</span>
               </div>
             )) : <EmptyState title="No listing data yet" body="Publish a listing to start collecting campaign views." />}
           </div>

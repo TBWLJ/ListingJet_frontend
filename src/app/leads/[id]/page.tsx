@@ -17,7 +17,7 @@ export default function LeadDetailsPage() {
   return (
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">{lead.name}</h1>
-      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
+      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
         <div className="grid gap-4 md:grid-cols-2">
           <p><strong>Phone:</strong> {lead.phone || "N/A"}</p>
           <p><strong>Email:</strong> {lead.email || "N/A"}</p>
@@ -34,7 +34,7 @@ export default function LeadDetailsPage() {
         <div className="mt-6 max-w-xl">
           <label>Internal note</label>
           <textarea value={note} onChange={(e) => setNote(e.target.value)} />
-          <Button className="mt-3" onClick={async () => { await api.post(`/leads/${id}/notes`, { body: note }); setNote(""); load(); }}>Add note</Button>
+          <Button className="mt-3 w-full sm:w-auto" onClick={async () => { await api.post(`/leads/${id}/notes`, { body: note }); setNote(""); load(); }}>Add note</Button>
         </div>
       </section>
     </DashboardShell>

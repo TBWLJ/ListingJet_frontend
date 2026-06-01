@@ -57,12 +57,12 @@ export default function BillingPage() {
     <DashboardShell>
       <h1 className="text-2xl font-bold text-navy">Billing</h1>
       {notice && <p className="mt-4 rounded-md bg-mint/10 p-3 text-sm font-medium text-mint">{notice}</p>}
-      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
+      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
         <p className="font-semibold text-navy">Current plan: <span className="capitalize">{subscription?.plan || "trial"}</span></p>
         <p className="mt-1 text-sm text-slate-500">Status: {subscription?.status || "loading"}</p>
       </section>
       <div className="mt-6 max-w-xs"><label>Billing cycle</label><select value={cycle} onChange={(e) => setCycle(e.target.value)}><option value="monthly">Monthly</option><option value="annual">Annual</option></select></div>
-      <div className="mt-6 grid gap-4 lg:grid-cols-4">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {plans.map((plan) => (
           <div key={plan.id} className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-bold text-navy">{plan.name}</h2>
@@ -71,9 +71,9 @@ export default function BillingPage() {
           </div>
         ))}
       </div>
-      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
+      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
         <h2 className="font-semibold text-navy">Payment history</h2>
-        <div className="mt-4 space-y-2">{payments.map((payment) => <div key={payment._id} className="flex justify-between rounded-md bg-slate-50 p-3 text-sm"><span>{payment.reference}</span><span>{payment.status}</span></div>)}</div>
+        <div className="mt-4 space-y-2">{payments.map((payment) => <div key={payment._id} className="flex flex-col gap-1 rounded-md bg-slate-50 p-3 text-sm sm:flex-row sm:justify-between"><span className="break-all">{payment.reference}</span><span className="shrink-0 capitalize">{payment.status}</span></div>)}</div>
       </section>
     </DashboardShell>
   );
