@@ -142,7 +142,7 @@ export default function LandingPage() {
 
       <section className="border-y border-slate-200 bg-white">
         <div className="container-page grid gap-4 py-6 text-sm text-slate-500 md:grid-cols-4">
-          {["Brokerage-ready", "Mobile-first pages", "Paystack billing", "Client proof reports"].map((item) => (
+          {["Brokerage-ready", "Mobile-first pages", "Secure subscription billing", "Client proof reports"].map((item) => (
             <div key={item} className="flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> {item}</div>
           ))}
         </div>

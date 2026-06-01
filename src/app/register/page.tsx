@@ -23,14 +23,16 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+type CountryOption = { name: string; isoCode: string; flag?: string };
+type StateOption = { name: string; isoCode: string; countryCode: string };
 
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [countries, setCountries] = useState<string[]>([]);
-  const [states, setStates] = useState<string[]>([]);
+  const [countries, setCountries] = useState<CountryOption[]>([]);
+  const [states, setStates] = useState<StateOption[]>([]);
   const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
   const selectedCountry = watch("country");
 
@@ -101,16 +103,20 @@ export default function RegisterPage() {
               <label>Country</label>
               <select {...register("country")}>
                 <option value="">Select country</option>
-                {countries.map((country) => <option key={country} value={country}>{country}</option>)}
+                {countries.map((country) => <option key={country.isoCode} value={country.isoCode}>{country.flag ? `${country.flag} ` : ""}{country.name}</option>)}
               </select>
               {errors.country && <p className="mt-1 text-xs text-red-600">Country is required</p>}
             </div>
             <div>
               <label>State/city</label>
-              <select {...register("city")} disabled={!selectedCountry}>
-                <option value="">{selectedCountry ? "Select state/city" : "Select country first"}</option>
-                {states.map((state) => <option key={state} value={state}>{state}</option>)}
-              </select>
+              {selectedCountry && states.length === 0 ? (
+                <input placeholder="Enter city or region" {...register("city")} />
+              ) : (
+                <select {...register("city")} disabled={!selectedCountry}>
+                  <option value="">{selectedCountry ? "Select state/city" : "Select country first"}</option>
+                  {states.map((state) => <option key={`${state.countryCode}-${state.isoCode}`} value={state.name}>{state.name}</option>)}
+                </select>
+              )}
               {errors.city && <p className="mt-1 text-xs text-red-600">State/city is required</p>}
             </div>
           </div>

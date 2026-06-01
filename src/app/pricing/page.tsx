@@ -188,7 +188,7 @@ export default function PricingPage() {
               <h2 className={styles.sectionTitle}>What each plan includes</h2>
             </div>
             <div className={styles.paymentNote}>
-              <CreditCard className={styles.greenIcon} size={16} /> Secure payments powered by Paystack
+              <CreditCard className={styles.greenIcon} size={16} /> Secure payments powered by Finswitz
             </div>
           </div>
           <div className={styles.comparison}>
