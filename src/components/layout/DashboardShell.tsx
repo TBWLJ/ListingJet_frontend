@@ -71,7 +71,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
           <div className="flex h-16 items-center justify-between px-4 lg:px-8">
             <Link href="/dashboard" className="font-bold text-navy lg:hidden">ListingJet</Link>
-            <p className="hidden text-sm text-slate-500 lg:block">Upload Once. Market Everywhere. Track Every Lead.</p>
+            <p className="hidden text-sm text-slate-500 lg:block">Upload Once. Market Everywhere. Generate More Leads.</p>
             <button
               className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-slate-100"
               onClick={() => {

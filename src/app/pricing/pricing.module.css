@@ -93,7 +93,7 @@
 
 .plansGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -339,8 +339,8 @@
 .comparisonRow,
 .comparisonHead {
   display: grid;
-  min-width: 760px;
-  grid-template-columns: 1.2fr repeat(3, 1fr);
+  min-width: 920px;
+  grid-template-columns: 1.2fr repeat(4, 1fr);
 }
 
 .comparisonHead {

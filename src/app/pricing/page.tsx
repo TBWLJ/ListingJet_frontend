@@ -10,26 +10,38 @@ const plans = [
   {
     id: "starter",
     name: "Starter",
+    monthly: "₦15,000",
+    annual: "₦150,000",
+    annualNote: "Save ₦30,000 yearly",
+    description: "For solo agents and small businesses starting with professional listing campaigns.",
+    limit: "20 active listings",
+    highlighted: false,
+    features: ["Campaign pages", "Lead capture", "Analytics", "Marketing assets", "Multi-channel sharing"],
+    unavailable: ["Campaign Scheduler", "Visibility Score", "Done-for-you services"]
+  },
+  {
+    id: "growth",
+    name: "Growth",
     monthly: "₦50,000",
     annual: "₦500,000",
     annualNote: "Save ₦100,000 yearly",
-    description: "For agents, small teams, and businesses launching professional campaign pages.",
-    limit: "50 active listings",
-    highlighted: false,
-    features: ["Campaign pages", "Lead capture", "Basic analytics", "Multi-channel sharing", "Marketing copy generator"],
-    unavailable: ["Team access", "Advanced reports", "API access"]
+    description: "For growing Nigerian and African teams that need scheduling, insight, and consistency.",
+    limit: "100 active listings",
+    highlighted: true,
+    features: ["Campaign Scheduler", "Marketing Asset Studio", "Advanced analytics", "Visibility Score", "Marketing Health Score", "Priority support"],
+    unavailable: ["Monthly custom flyer design", "Video ad credits", "White-label platform"]
   },
   {
-    id: "professional",
-    name: "Professional",
+    id: "premium",
+    name: "Premium",
     monthly: "₦100,000",
     annual: "₦1,000,000",
     annualNote: "Save ₦200,000 yearly",
-    description: "For growing listing teams that need advanced analytics, reports, and collaboration.",
+    description: "For serious listing teams that want software plus creative support and boost credits.",
     limit: "500 active listings",
-    highlighted: true,
-    features: ["Advanced analytics", "Team access", "Marketing reports", "Priority support", "Landlord performance reports", "Lead status pipeline"],
-    unavailable: ["White-label access", "API access"]
+    highlighted: false,
+    features: ["Everything in Growth", "Monthly custom flyer design", "Two promotional video ads monthly", "Campaign boost credits", "Priority distribution", "Premium support"],
+    unavailable: ["White-label platform", "Dedicated marketing team"]
   },
   {
     id: "enterprise",
@@ -37,29 +49,31 @@ const plans = [
     monthly: "₦250,000",
     annual: "₦2,500,000",
     annualNote: "Save ₦500,000 yearly",
-    description: "For agencies, franchises, and high-volume businesses that need scale and control.",
+    description: "For platforms, agencies, franchises, and high-volume businesses that need custom scale.",
     limit: "Unlimited listings",
     highlighted: false,
-    features: ["Unlimited team members", "White-label access", "API access", "Dedicated support", "Client-ready reports", "Enterprise controls"],
+    features: ["White-label platform", "Custom domain support", "Dedicated account manager", "Dedicated marketing team", "API access", "Custom integrations"],
     unavailable: []
   }
 ];
 
 const comparison = [
-  ["Active listings", "50", "500", "Unlimited"],
-  ["Campaign pages", "Included", "Included", "Included"],
-  ["Lead capture", "Included", "Included", "Included"],
-  ["Analytics", "Basic", "Advanced", "Advanced"],
-  ["Team members", "Owner only", "Included", "Unlimited"],
-  ["Marketing reports", "Basic", "Included", "Included"],
-  ["White-label access", "No", "No", "Included"],
-  ["API access", "No", "No", "Included"]
+  ["Active listings", "20", "100", "500", "Unlimited"],
+  ["Campaign pages", "Included", "Included", "Included", "Included"],
+  ["Lead capture", "Included", "Included", "Included", "Included"],
+  ["Marketing assets", "Included", "Studio", "Studio + custom flyer", "Dedicated team"],
+  ["Campaign Scheduler", "No", "Included", "Included", "Included"],
+  ["Visibility Score", "No", "Included", "Included", "Included"],
+  ["Marketing Health Score", "No", "Included", "Included", "Included"],
+  ["Boost credits", "No", "No", "Included", "Custom"],
+  ["White-label platform", "No", "No", "No", "Included"],
+  ["API access", "No", "No", "No", "Included"]
 ];
 
 const faqs = [
   {
     question: "Can I switch plans later?",
-    answer: "Yes. You can upgrade as your listing volume grows, and ListingJet keeps your workspace, listings, leads, and analytics connected."
+    answer: "Yes. You can upgrade as your listing volume, distribution needs, and client reporting requirements grow."
   },
   {
     question: "What counts as an active listing?",
@@ -71,14 +85,14 @@ const faqs = [
   },
   {
     question: "Is ListingJet only for real estate?",
-    answer: "No. It works for real estate, hotels, venues, auto dealers, schools, jobs, products, and service businesses."
+    answer: "No. It works for properties, hotels, venues, vehicles, jobs, services, products, and classified content across Nigeria and Africa."
   }
 ];
 
 const valueProps = [
-  { Icon: ShieldCheck, title: "Professional trust", body: "Verified business signals, premium pages, and clear client-facing presentation." },
-  { Icon: BarChart3, title: "Measurable visibility", body: "Views, leads, clicks, shares, sources, conversion rate, and top listing reports." },
-  { Icon: FileText, title: "Owner-ready reports", body: "Shareable performance summaries that prove each listing is being marketed properly." }
+  { Icon: ShieldCheck, title: "Trust-first marketing", body: "Premium Canadian-style presentation built for Nigerian businesses that need to look credible online." },
+  { Icon: BarChart3, title: "Visibility intelligence", body: "Visibility Score, Marketing Health Score, campaign reach, leads, clicks, and listing performance reports." },
+  { Icon: FileText, title: "Creative output", body: "Marketing Asset Studio, custom flyer support, video ad credits, and done-for-you service pathways." }
 ];
 
 export default function PricingPage() {
@@ -94,9 +108,9 @@ export default function PricingPage() {
               <div className={styles.eyebrow}>
                 <Sparkles className={styles.goldIcon} size={16} /> Pricing for modern listing teams
               </div>
-              <h1 className={styles.heroTitle}>Simple plans for every stage of listing growth</h1>
+              <h1 className={styles.heroTitle}>Pricing for Africa-first listing growth</h1>
               <p className={styles.heroCopy}>
-                Start with premium campaign pages, then scale into team access, performance reporting, white-label tools, and API access as your operation grows.
+                Start with campaign pages and lead capture, then scale into scheduling, asset creation, visibility scores, boost credits, and done-for-you marketing support.
               </p>
               <div className={styles.toggle}>
                 <button
@@ -195,14 +209,16 @@ export default function PricingPage() {
             <div className={styles.comparisonHead}>
               <div className={styles.comparisonCell}>Feature</div>
               <div className={styles.comparisonCell}>Starter</div>
-              <div className={styles.comparisonCell}>Professional</div>
+              <div className={styles.comparisonCell}>Growth</div>
+              <div className={styles.comparisonCell}>Premium</div>
               <div className={styles.comparisonCell}>Enterprise</div>
             </div>
-            {comparison.map(([feature, starter, professional, enterprise]) => (
+            {comparison.map(([feature, starter, growth, premium, enterprise]) => (
               <div key={feature} className={styles.comparisonRow}>
                 <div className={`${styles.comparisonCell} ${styles.featureName}`}>{feature}</div>
                 <div className={styles.comparisonCell}>{starter}</div>
-                <div className={styles.comparisonCell}>{professional}</div>
+                <div className={styles.comparisonCell}>{growth}</div>
+                <div className={styles.comparisonCell}>{premium}</div>
                 <div className={styles.comparisonCell}>{enterprise}</div>
               </div>
             ))}
@@ -216,7 +232,7 @@ export default function PricingPage() {
             <div>
               <p className={styles.kicker}>Questions</p>
               <h2 className={styles.sectionTitle} style={{ color: "#ffffff" }}>Pricing questions teams ask before launch</h2>
-              <p className={styles.faqCopy}>Choose the plan that matches your current listing volume. Upgrade when your team, client reporting, or distribution needs grow.</p>
+              <p className={styles.faqCopy}>Choose the plan that matches your current listing volume. Upgrade when your scheduling, visibility, creative, or distribution needs grow.</p>
             </div>
             <div className={styles.faqList}>
               {faqs.map((faq) => (
@@ -240,8 +256,8 @@ export default function PricingPage() {
                 <div className={styles.eyebrow}>
                   <Users className={styles.greenIcon} size={16} /> Ready for a sharper listing operation
                 </div>
-                <h2 className={styles.ctaTitle}>Start with the plan that fits today. Scale when your campaigns do.</h2>
-                <p className={styles.ctaCopy}>Create your workspace, publish your first listing campaign, and begin tracking every view, share, call, WhatsApp click, and lead.</p>
+                <h2 className={styles.ctaTitle}>Start lean. Grow into a complete marketing operating system.</h2>
+                <p className={styles.ctaCopy}>Create your workspace, publish your first listing campaign, generate marketing assets, and start building trusted lead pipelines.</p>
               </div>
               <Link href="/register" className={styles.primaryCta}>
                 Start Growing Your Listings <ArrowRight size={16} />

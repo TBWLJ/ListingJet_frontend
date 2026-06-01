@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/Button";
 import { api } from "@/lib/api";
 
 const plans = [
-  { id: "starter", name: "Starter", monthly: "₦50,000", annual: "₦500,000" },
-  { id: "professional", name: "Professional", monthly: "₦100,000", annual: "₦1,000,000" },
+  { id: "starter", name: "Starter", monthly: "₦15,000", annual: "₦150,000" },
+  { id: "growth", name: "Growth", monthly: "₦50,000", annual: "₦500,000" },
+  { id: "premium", name: "Premium", monthly: "₦100,000", annual: "₦1,000,000" },
   { id: "enterprise", name: "Enterprise", monthly: "₦250,000", annual: "₦2,500,000" }
 ];
 
@@ -61,7 +62,7 @@ export default function BillingPage() {
         <p className="mt-1 text-sm text-slate-500">Status: {subscription?.status || "loading"}</p>
       </section>
       <div className="mt-6 max-w-xs"><label>Billing cycle</label><select value={cycle} onChange={(e) => setCycle(e.target.value)}><option value="monthly">Monthly</option><option value="annual">Annual</option></select></div>
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+      <div className="mt-6 grid gap-4 lg:grid-cols-4">
         {plans.map((plan) => (
           <div key={plan.id} className="rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="font-bold text-navy">{plan.name}</h2>

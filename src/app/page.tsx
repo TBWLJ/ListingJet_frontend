@@ -4,22 +4,28 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight,
+  Activity,
   BarChart3,
+  BriefcaseBusiness,
   Building2,
   CalendarCheck,
+  CalendarDays,
   Check,
   CheckCircle2,
   ClipboardCheck,
   Facebook,
-  Globe2,
   Linkedin,
   Megaphone,
   MessageSquareText,
+  Palette,
   PieChart,
   Send,
   ShieldCheck,
   Sparkles,
   Star,
+  Store,
+  Target,
+  TrendingUp,
   Twitter,
   Users
 } from "lucide-react";
@@ -27,17 +33,17 @@ import { PublicNav } from "@/components/layout/PublicNav";
 import { Button } from "@/components/ui/Button";
 
 const wins = [
-  "Launch campaign pages in minutes",
-  "Capture calls, WhatsApp clicks, and form inquiries",
-  "Share polished assets across every channel",
-  "Prove performance with client-ready reports"
+  "Get more visibility for every listing",
+  "Generate more qualified leads from social traffic",
+  "Create campaign pages and marketing assets in minutes",
+  "Prove marketing effort to owners, clients, and managers"
 ];
 
 const featureCards = [
-  { Icon: ShieldCheck, title: "Trust-first campaign pages", body: "Present every listing with premium pages, business credentials, owner-ready details, and clear calls to action." },
-  { Icon: Megaphone, title: "One-click distribution", body: "Generate captions and share listings across WhatsApp, Facebook, Instagram, X, LinkedIn, Telegram, and email." },
-  { Icon: MessageSquareText, title: "Lead capture built in", body: "Turn visitors into inquiries, calls, WhatsApp messages, inspections, bookings, and sales conversations." },
-  { Icon: BarChart3, title: "Proof clients can see", body: "Give owners and stakeholders visibility into views, leads, share clicks, sources, and campaign performance." }
+  { Icon: ShieldCheck, title: "Trust-first campaign pages", body: "Present every listing with polished pages, business credentials, proof signals, and clear calls to action." },
+  { Icon: Megaphone, title: "Multi-channel distribution", body: "Generate captions and distribute listings across WhatsApp, Facebook, Instagram, X, LinkedIn, Telegram, and email." },
+  { Icon: MessageSquareText, title: "Lead generation system", body: "Turn visitors into inquiries, calls, WhatsApp messages, inspections, bookings, and sales conversations." },
+  { Icon: BarChart3, title: "Performance proof", body: "Show owners and stakeholders views, leads, share clicks, source performance, and campaign outcomes." }
 ];
 
 const industries = [
@@ -53,8 +59,18 @@ const industries = [
 
 const workflow = [
   { title: "Upload once", body: "Add listing details, media, contact info, pricing, location, amenities, and SEO metadata.", Icon: Building2 },
-  { title: "Publish everywhere", body: "Launch a premium page and generate ready-to-share captions, links, and visual preview cards.", Icon: Globe2 },
-  { title: "Track every lead", body: "Monitor views, lead submissions, calls, WhatsApp clicks, shares, sources, and conversion rate.", Icon: PieChart }
+  { title: "Create campaign assets", body: "Generate pages, captions, flyers, cards, banners, story graphics, and lead generation visuals.", Icon: Palette },
+  { title: "Distribute and measure", body: "Schedule campaigns, share across channels, monitor visibility, leads, reach, and engagement.", Icon: PieChart }
+];
+
+const expansionFeatures = [
+  { Icon: CalendarDays, title: "Campaign Scheduler", body: "Schedule campaigns across Facebook, Instagram, X, LinkedIn, WhatsApp queues, Telegram, and email." },
+  { Icon: Palette, title: "Marketing Asset Studio", body: "Generate flyers, square posts, stories, banners, listing cards, thumbnails, and lead generation graphics." },
+  { Icon: TrendingUp, title: "Campaign Boost Marketplace", body: "Purchase Starter, Growth, Premium, or Enterprise boosts for featured, trending, category, and regional exposure." },
+  { Icon: Store, title: "Audience Network", body: "Public discovery pages for properties, hotels, events, vehicles, jobs, services, and products." },
+  { Icon: Target, title: "Competitor Visibility Score", body: "Compare listing views, reach, shares, and leads against category averages and top performers." },
+  { Icon: Activity, title: "Marketing Health Score", body: "Get actionable recommendations for photos, video, distribution frequency, content quality, and coverage." },
+  { Icon: BriefcaseBusiness, title: "Done-for-you services", body: "Request flyer design, video ads, campaign setup, landing optimization, content writing, and consultation." }
 ];
 
 const proofMetrics = [
@@ -65,9 +81,10 @@ const proofMetrics = [
 ];
 
 const pricing = [
-  { name: "Starter", price: "₦50,000", detail: "50 active listings", highlighted: false },
-  { name: "Professional", price: "₦100,000", detail: "500 active listings and team access", highlighted: true },
-  { name: "Enterprise", price: "₦250,000", detail: "Unlimited listings and white-label access", highlighted: false }
+  { name: "Starter", price: "₦15,000", detail: "20 active listings, campaign pages, lead capture, analytics, and marketing assets", highlighted: false },
+  { name: "Growth", price: "₦50,000", detail: "100 active listings, scheduler, asset studio, visibility score, and health score", highlighted: true },
+  { name: "Premium", price: "₦100,000", detail: "500 listings, custom flyer design, video ad credits, boost credits, and priority distribution", highlighted: false },
+  { name: "Enterprise", price: "₦250,000", detail: "Unlimited listings, white-label platform, custom domain, API, and dedicated marketing team", highlighted: false }
 ];
 
 export default function LandingPage() {
@@ -78,11 +95,11 @@ export default function LandingPage() {
         <div className="container-page grid min-h-[calc(100vh-64px)] items-center gap-12 py-12 lg:grid-cols-[1.02fr_0.98fr] lg:py-16">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-600 shadow-sm">
-              <Sparkles className="h-4 w-4 text-gold" /> Upload Once. Market Everywhere. Track Every Lead.
+              <Sparkles className="h-4 w-4 text-gold" /> Upload Once. Market Everywhere. Generate More Leads.
             </div>
-            <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-normal text-navy md:text-6xl">Turn Every Listing Into a Marketing Campaign</h1>
+            <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-normal text-navy md:text-6xl">Turn Every Listing Into A Marketing Campaign</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              ListingJet helps businesses create premium campaign pages, distribute listings across channels, capture leads, and prove marketing performance with real analytics.
+              ListingJet helps businesses create campaign pages, marketing assets, social content, audience exposure, and lead generation systems from a single listing upload.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/register"><Button className="h-12 px-5">Start Growing Your Listings <ArrowRight className="h-4 w-4" /></Button></Link>
@@ -96,8 +113,8 @@ export default function LandingPage() {
               ))}
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-500">
-              <span className="font-semibold text-navy">Built for modern listing teams in Canada, the USA, and fast-growing markets.</span>
-              <span className="inline-flex items-center gap-1"><Star className="h-4 w-4 fill-gold text-gold" /> Premium SaaS experience</span>
+              <span className="font-semibold text-navy">Canadian-style trust, built for Nigeria and Africa-first growth.</span>
+              <span className="inline-flex items-center gap-1"><Star className="h-4 w-4 fill-gold text-gold" /> Professional, secure, investor-ready SaaS experience</span>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.45, delay: 0.08 }} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft">
@@ -114,7 +131,7 @@ export default function LandingPage() {
               <div className="min-h-[360px] bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85')] bg-cover bg-center" />
               <div className="p-5">
                 <p className="text-sm font-semibold text-navy">4 Bed Detached Home</p>
-                <p className="mt-1 text-sm text-slate-500">Toronto-style campaign page with lead capture, channel tracking, and owner reporting.</p>
+                  <p className="mt-1 text-sm text-slate-500">Lagos-ready campaign page with Canadian-style polish, lead capture, channel tracking, and owner reporting.</p>
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   {proofMetrics.map(([value, label]) => (
                     <div key={label} className="rounded-md border border-slate-200 p-3">
@@ -142,7 +159,7 @@ export default function LandingPage() {
 
       <section className="border-y border-slate-200 bg-white">
         <div className="container-page grid gap-4 py-6 text-sm text-slate-500 md:grid-cols-4">
-          {["Brokerage-ready", "Mobile-first pages", "Secure subscription billing", "Client proof reports"].map((item) => (
+          {["Nigeria-first visibility", "Canadian-style presentation", "Secure subscription billing", "Client proof reports"].map((item) => (
             <div key={item} className="flex items-center gap-2"><Check className="h-4 w-4 text-mint" /> {item}</div>
           ))}
         </div>
@@ -151,8 +168,8 @@ export default function LandingPage() {
       <section id="platform" className="container-page py-16 lg:py-20">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase text-mint">Platform</p>
-          <h2 className="mt-2 text-3xl font-bold text-navy md:text-4xl">Everything a listing team needs after the upload</h2>
-          <p className="mt-4 text-slate-600">ListingJet gives your operation the professional polish customers expect from established Canadian and American SaaS products, without adding more manual marketing work.</p>
+          <h2 className="mt-2 text-3xl font-bold text-navy md:text-4xl">A marketing operating system, not another CRM</h2>
+          <p className="mt-4 text-slate-600">ListingJet is not a CRM, property management system, or project management tool. It is a marketing operating system for businesses that depend on listings, ads, products, services, properties, events, vehicles, jobs, and classified content.</p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {featureCards.map(({ Icon, title, body }) => (
@@ -212,6 +229,25 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="container-page py-16 lg:py-20">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase text-mint">ListingJet 2.0</p>
+          <h2 className="mt-2 text-3xl font-bold text-navy md:text-4xl">From campaign pages to a complete marketing operating system</h2>
+          <p className="mt-4 text-slate-600">The next layer of ListingJet helps African businesses schedule campaigns, generate branded assets, buy visibility, join public discovery pages, benchmark performance, and request done-for-you marketing services.</p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {expansionFeatures.map(({ Icon, title, body }) => (
+            <div key={title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+              <div className="grid h-11 w-11 place-items-center rounded-md bg-mint/10">
+                <Icon className="h-6 w-6 text-mint" />
+              </div>
+              <h3 className="mt-4 font-semibold text-navy">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -286,11 +322,11 @@ export default function LandingPage() {
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase text-mint">Plans</p>
-            <h2 className="mt-2 text-3xl font-bold text-navy md:text-4xl">Simple pricing for growing listing operations</h2>
-            <p className="mt-4 text-slate-600">Start with essential campaign pages and scale into advanced analytics, team access, reports, API access, and white-label capabilities.</p>
+            <h2 className="mt-2 text-3xl font-bold text-navy md:text-4xl">Plans for visibility, leads, and trust</h2>
+            <p className="mt-4 text-slate-600">Start with affordable campaign pages, then scale into scheduling, asset creation, health scoring, boost credits, white-label infrastructure, and done-for-you marketing.</p>
             <Link href="/pricing"><Button className="mt-6">Compare all plans <ArrowRight className="h-4 w-4" /></Button></Link>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {pricing.map((plan) => (
               <div key={plan.name} className={`rounded-lg border p-5 shadow-sm ${plan.highlighted ? "border-mint bg-navy text-white" : "border-slate-200 bg-white text-navy"}`}>
                 <p className="font-bold">{plan.name}</p>
@@ -310,8 +346,8 @@ export default function LandingPage() {
               <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-mint/10 px-3 py-1 text-sm font-semibold text-mint">
                 <Users className="h-4 w-4" /> Built for professional teams
               </div>
-              <h2 className="text-3xl font-bold text-navy md:text-4xl">Ready to market listings like a serious business?</h2>
-              <p className="mt-3 max-w-2xl text-slate-600">Create your workspace, publish your first campaign page, and start tracking the conversations your listings generate.</p>
+              <h2 className="text-3xl font-bold text-navy md:text-4xl">Ready to make every listing generate more leads?</h2>
+              <p className="mt-3 max-w-2xl text-slate-600">Create your workspace, publish your first campaign page, generate marketing assets, and build a trusted lead-generation system.</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link href="/register"><Button className="h-12 px-5">Start Growing Your Listings</Button></Link>
@@ -324,7 +360,7 @@ export default function LandingPage() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="container-page flex flex-col justify-between gap-4 py-8 text-sm text-slate-500 md:flex-row">
           <p className="font-semibold text-navy">ListingJet</p>
-          <p>Upload Once. Market Everywhere. Track Every Lead.</p>
+          <p>Upload Once. Market Everywhere. Generate More Leads.</p>
           <div className="flex gap-4">
             <Link href="/pricing">Pricing</Link>
             <Link href="/login">Login</Link>

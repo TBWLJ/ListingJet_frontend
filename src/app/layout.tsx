@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ListingJet",
-  description: "Upload Once. Market Everywhere. Track Every Lead."
+  description: "Upload Once. Market Everywhere. Generate More Leads."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
