@@ -23,7 +23,10 @@ export default function LoginPage() {
     try {
       const { data } = await api.post("/auth/login", values);
       setSession(data.token);
-      router.push("/dashboard");
+      const subscriptionRes = await api.get("/subscriptions/current");
+      const subscription = subscriptionRes.data.subscription;
+      if (subscription?.status === "active") router.push("/dashboard");
+      else router.push("/billing?onboarding=1");
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     }

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BarChart3, Bell, BriefcaseBusiness, CreditCard, Home, LogOut, Megaphone, Settings, Users } from "lucide-react";
-import { clearSession } from "@/lib/api";
+import { api, clearSession } from "@/lib/api";
 
 const nav = [
   { href: "/dashboard", label: "Overview", icon: Home },
@@ -19,6 +20,37 @@ const nav = [
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [checkingSubscription, setCheckingSubscription] = useState(true);
+
+  useEffect(() => {
+    let alive = true;
+
+    async function checkSubscription() {
+      try {
+        const { data } = await api.get("/subscriptions/current");
+        const subscription = data.subscription;
+        const active = subscription?.status === "active";
+        if (alive && !active && pathname !== "/billing") {
+          router.replace("/billing?onboarding=1");
+          return;
+        }
+      } catch {
+        if (alive) {
+          clearSession();
+          router.replace("/login");
+          return;
+        }
+      } finally {
+        if (alive) setCheckingSubscription(false);
+      }
+    }
+
+    checkSubscription();
+    return () => {
+      alive = false;
+    };
+  }, [pathname, router]);
+
   return (
     <div className="min-h-screen bg-slate-50">
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-navy text-white lg:block">
@@ -51,7 +83,11 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
         </header>
-        <main className="px-4 py-6 lg:px-8">{children}</main>
+        <main className="px-4 py-6 lg:px-8">
+          {checkingSubscription && pathname !== "/billing" ? (
+            <div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-500">Checking subscription...</div>
+          ) : children}
+        </main>
       </div>
     </div>
   );
